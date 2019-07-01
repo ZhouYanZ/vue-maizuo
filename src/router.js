@@ -20,6 +20,7 @@ export default new VueRouter({
     },
     {
       path: "/film/:filmId",
+      name: "film",
       component: () => import("./views/film/index.vue")
     },
     {
