@@ -29,7 +29,8 @@
               <span class="label">{{ item.nation }} | {{ item.runtime }}分钟</span>
             </div>
           </div>
-          <div class="buy">购票</div>
+          <div class="buy" v-show="filmType==='nowPlaying'">购票</div>
+          <div class="buy" v-show="filmType==='comingSoon'">预约</div>
         </router-link>
       </li>
     </ul>
@@ -46,7 +47,8 @@ export default {
       default() {
         return [];
       }
-    }
+    },
+    filmType: String
   },
 
   methods: {
