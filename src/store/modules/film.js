@@ -75,7 +75,7 @@ const actions = {
    * 获取影片列表数据
    * @param {Boolean} isChangeFilmType 是否是切换影片类型之后的获取数据
    */
-  getFilmList({ commit, state }, isChangeFilmType) {
+  getFilmList({ commit, state, rootState }, isChangeFilmType) {
     // 判断 isChangeFilmType
     if (isChangeFilmType) {
       // 1. 清空filmlist
@@ -89,7 +89,9 @@ const actions = {
     axios
       .get("https://m.maizuo.com/gateway", {
         params: {
-          cityId: 440300,
+          // cityId 不能写死
+          // cityId: 440300,
+          cityId: rootState.city.curCityId,
           pageNum: state.pageNum,
           pageSize: state.pageSize,
           // type = 1 正在热映

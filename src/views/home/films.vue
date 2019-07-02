@@ -4,7 +4,10 @@
       <Banner class="banner" :list="bannerList" pagination loop />
 
       <div class="city-fixed" @click="handleGoCity">
-        <span>深圳</span>
+        <!--
+          curCityInfo 可能在初次渲染的时候，ajax 请求还没有完成，导致得到 undefined 。再导致 。name 报错
+        -->
+        <span>{{ curCityInfo && curCityInfo.name }}</span>
         <i class="iconfont icon-xiala"></i>
       </div>
 
@@ -36,6 +39,7 @@ export default {
   computed: {
     ...mapState("film", ["bannerList", "filmList"]),
     ...mapGetters("film", ["isFinished"]),
+    ...mapGetters("city", ["curCityInfo"]),
 
     curFilmType: {
       get() {

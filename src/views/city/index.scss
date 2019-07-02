@@ -1,10 +1,11 @@
 @import "~@/assets/styles/common/mixins.scss";
 
 .page-city {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   .lv-indexlist {
     width: 100%;
-    height: 100%;
     flex: 1;
     display: flex;
     background: #fff;
@@ -94,6 +95,33 @@
           }
         }
       }
+    }
+  }
+  .search_box {
+    width: 100%;
+    padding-left: 15px;
+    li {
+      @include border-bottom;
+      height: 44px;
+      position: relative;
+      line-height: 44px;
+      color: #191a1b;
+      font-size: 14px;
+    }
+  }
+  .empty-result {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    text-align: center;
+    img {
+      width: 90px;
+      margin: auto;
+    }
+    p {
+      color: #bdc0c5;
+      font-size: 14px;
+      margin: 0;
     }
   }
 }
