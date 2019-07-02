@@ -18,15 +18,22 @@
               <span class="name">{{ item.name }}</span>
               <span class="item">{{ item.filmType.name }}</span>
             </div>
-            <div class="film-grade info-col" style="visibility: visible;">
+            <div
+              v-show="filmType==='nowPlaying'"
+              class="film-grade info-col"
+              style="visibility: visible;"
+            >
               <span class="label">观众评分</span>
               <span class="grade">{{ item.grade }}</span>
             </div>
             <div class="film-actors info-col">
               <span class="label">主演：{{ item.actors | actorFormat }}</span>
             </div>
-            <div class="film-detail info-col">
+            <div v-show="filmType==='nowPlaying'" class="film-detail info-col">
               <span class="label">{{ item.nation }} | {{ item.runtime }}分钟</span>
+            </div>
+            <div v-show="filmType==='comingSoon'" class="film-detail info-col">
+              <span class="label">上映日期：{{ item.premiereAt }}</span>
             </div>
           </div>
           <div class="buy" v-show="filmType==='nowPlaying'">购票</div>
@@ -70,9 +77,10 @@ export default {
     // key - 过滤器名字
     // value - 函数 接收一个 value 值
     // key: value
-    actorFormat(actors) {
+    actorFormat(actors = []) {
+      // let actors = actors || [];
       let tmp = actors.map(item => item.name);
-      return tmp.join(" ");
+      return tmp.length ? tmp.join(" ") : "暂无主演";
     },
 
     fil1(value) {

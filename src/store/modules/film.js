@@ -71,7 +71,19 @@ const actions = {
       });
   },
 
-  getFilmList({ commit, state }) {
+  /**
+   * 获取影片列表数据
+   * @param {Boolean} isChangeFilmType 是否是切换影片类型之后的获取数据
+   */
+  getFilmList({ commit, state }, isChangeFilmType) {
+    // 判断 isChangeFilmType
+    if (isChangeFilmType) {
+      // 1. 清空filmlist
+      commit({ type: "setFilmList", list: [], total: 1 });
+      // 2. 将 pageNum 设置为 1
+      commit({ type: "setPageNum", num: 1 });
+    }
+
     // 请求之前， loading
     Toast.loading({ duration: 0, mask: true, message: "加载中..." });
     axios

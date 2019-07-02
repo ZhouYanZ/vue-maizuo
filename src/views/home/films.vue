@@ -61,7 +61,8 @@ export default {
   watch: {
     curFilmType(newVal, oldVal) {
       // 当 curFilmType 发生变化了，这是重新发送请求
-      this.getFilmList();
+      // 1. 先将所有 filmList 数据清空，然后将 pageNum 设置 为 1
+      this.getFilmList(true);
     }
   },
 
