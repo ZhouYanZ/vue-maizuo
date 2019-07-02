@@ -1,6 +1,8 @@
 <template>
   <div class="page-home">
+    <!-- <keep-alive> -->
     <router-view></router-view>
+    <!-- </keep-alive> -->
 
     <Tabbar
       :tabs="[

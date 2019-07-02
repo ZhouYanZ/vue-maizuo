@@ -3,6 +3,11 @@
     <div class="page-home-films">
       <Banner class="banner" :list="bannerList" pagination loop />
 
+      <div class="city-fixed" @click="handleGoCity">
+        <span>深圳</span>
+        <i class="iconfont icon-xiala"></i>
+      </div>
+
       <van-tabs v-model="curFilmType" sticky>
         <van-tab title="正在热映">
           <Filmlist filmType="nowPlaying" :list="filmList" />
@@ -67,8 +72,14 @@ export default {
   },
 
   methods: {
-    ...mapActions("film", ["getBannerList", "getFilmList"])
+    ...mapActions("film", ["getBannerList", "getFilmList"]),
 
+    /**
+     * 跳转到城市选择页面
+     */
+    handleGoCity() {
+      this.$router.push("/city");
+    }
     // onScroll() {
     //   console.log(123);
     // }
@@ -93,6 +104,24 @@ export default {
   .banner {
     img {
       width: 100%;
+    }
+  }
+  .city-fixed {
+    position: absolute;
+    top: 18px;
+    left: 7px;
+    color: #fff;
+    z-index: 10;
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.2);
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 0 5px;
+
+    i {
+      font-size: 10px;
     }
   }
 }
