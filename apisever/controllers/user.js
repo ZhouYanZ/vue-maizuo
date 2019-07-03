@@ -35,7 +35,10 @@ const postSignIn = (req, res) => {
       if (data) {
         res.send({
           code: 0,
-          msg: "ok"
+          msg: "ok",
+          data: {
+            username: data.username
+          }
         });
       } else {
         res.send({

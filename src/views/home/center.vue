@@ -2,7 +2,10 @@
   <div class="page-home-center">
     <div class="avatar">
       <img src="../../assets/images/avatar.png" class="avator-icon" />
-      <router-link to="/login" tag="div" class="nick-name">立即登录</router-link>
+
+      <div v-if="userInfo && userInfo.username" class="nick-name">{{ userInfo.username }}</div>
+
+      <router-link v-else to="/login" tag="div" class="nick-name">立即登录</router-link>
     </div>
 
     <ul class="my-order-tab">
@@ -29,8 +32,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  name: "center"
+  name: "center",
+
+  computed: {
+    ...mapState("user", ["userInfo"])
+  }
 };
 </script>
 

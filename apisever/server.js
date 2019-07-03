@@ -24,6 +24,11 @@ mongoose
 // 各种中间件的使用与配置
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
+server.use((req, res, next) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Headers", "content-type");
+  next();
+});
 
 // 路由的设置
 server.post("/sign-up", userController.postSignUp); // 注册

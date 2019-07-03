@@ -10,14 +10,19 @@
       <div class="form-group">
         <input placeholder="密码" class="input-control" type="password" v-model="password" />
       </div>
-      <div class="submit login-btn" @click="handleLogin">
+      <button
+        class="submit login-btn"
+        :disabled="!username || !password"
+        @click="handleLogin({username, password})"
+      >
         <span>登录</span>
-      </div>
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Login",
 
@@ -29,7 +34,7 @@ export default {
   },
 
   methods: {
-    handleLogin() {}
+    ...mapActions("user", ["handleLogin"])
   }
 };
 </script>
