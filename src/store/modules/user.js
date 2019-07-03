@@ -36,7 +36,9 @@ const actions = {
         Toast("登录成功");
         // 跳转 注意不能使用 this.$router
         setTimeout(() => {
-          router.push("/center");
+          // 1. 看看登录页面有没有 redirect 这个参数
+          let redirect = router.currentRoute.query.redirect || "/center";
+          router.replace(redirect);
         }, 1000);
       } else {
         // 登录失败

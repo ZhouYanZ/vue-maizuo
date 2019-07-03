@@ -21,9 +21,9 @@
       </li>
     </ul>
 
-    <div class="margin-set my-card">
+    <router-link tag="div" to="/card" class="margin-set my-card">
       <span class="label">卖座卡</span>
-    </div>
+    </router-link>
     <div class="margin-set my-balance">
       <span class="label">余额</span>
     </div>
