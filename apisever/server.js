@@ -24,6 +24,7 @@ mongoose
 // 各种中间件的使用与配置
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
+server.use(express.static("public"));
 server.use((req, res, next) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Headers", "content-type");

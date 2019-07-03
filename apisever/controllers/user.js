@@ -37,7 +37,9 @@ const postSignIn = (req, res) => {
           code: 0,
           msg: "ok",
           data: {
-            username: data.username
+            userId: data._id,
+            nickname: data.nickname,
+            avatar: data.avatar
           }
         });
       } else {

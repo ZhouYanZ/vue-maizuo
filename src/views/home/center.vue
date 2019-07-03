@@ -1,11 +1,13 @@
 <template>
   <div class="page-home-center">
-    <div class="avatar">
+    <div class="avatar" v-if="userInfo">
+      <img :src="userInfo.avatar" class="avator-icon" />
+      <div class="nick-name">{{ userInfo.nickname }}</div>
+    </div>
+
+    <div class="avatar" v-else>
       <img src="../../assets/images/avatar.png" class="avator-icon" />
-
-      <div v-if="userInfo && userInfo.username" class="nick-name">{{ userInfo.username }}</div>
-
-      <router-link v-else to="/login" tag="div" class="nick-name">立即登录</router-link>
+      <router-link to="/login" tag="div" class="nick-name">立即登录</router-link>
     </div>
 
     <ul class="my-order-tab">
