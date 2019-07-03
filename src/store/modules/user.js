@@ -52,6 +52,15 @@ const actions = {
     });
   },
 
+  /**
+   * 退出登录
+   */
+  handleLogout(context) {
+    context.commit({ type: "setUserInfo", info: null });
+    window.localStorage.removeItem("userInfo");
+    window.location.reload();
+  },
+
   handleUpdAvatar({ commit, state }, event) {
     Toast.loading({ duration: 0, message: "加载中..." });
     let formData = new FormData();

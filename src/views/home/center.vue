@@ -32,8 +32,8 @@
     <div class="margin-set my-balance">
       <span class="label">余额</span>
     </div>
-    <div class="margin-set system-set">
-      <span class="label">设置</span>
+    <div class="margin-set system-set" @click="handleLogout">
+      <span class="label">退出登录</span>
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("user", ["handleUpdAvatar"])
+    ...mapActions("user", ["handleUpdAvatar", "handleLogout"])
   }
 };
 </script>
