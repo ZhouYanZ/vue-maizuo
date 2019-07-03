@@ -1,6 +1,10 @@
 /* eslint-disable */
 const express = require("express");
 const mongoose = require("mongoose");
+const multer = require("multer");
+const update = multer({
+  dest: "./tmp"
+});
 const url = "mongodb://127.0.0.1:27017/maizuo";
 
 // 引入 controller
@@ -34,6 +38,11 @@ server.use((req, res, next) => {
 // 路由的设置
 server.post("/sign-up", userController.postSignUp); // 注册
 server.post("/sign-in", userController.postSignIn); // 登录
+server.post(
+  "/user/profile",
+  update.single("avatar"),
+  userController.postUpdAvatar
+); // 修改头像 multer
 
 // 监听端口
 server.listen(9090);

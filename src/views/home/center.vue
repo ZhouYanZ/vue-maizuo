@@ -1,12 +1,17 @@
 <template>
   <div class="page-home-center">
     <div class="avatar" v-if="userInfo">
-      <img :src="userInfo.avatar" class="avator-icon" />
+      <div class="avator-icon">
+        <img :src="userInfo.avatar" />
+        <input type="file" @change="handleUpdAvatar" />
+      </div>
       <div class="nick-name">{{ userInfo.nickname }}</div>
     </div>
 
     <div class="avatar" v-else>
-      <img src="../../assets/images/avatar.png" class="avator-icon" />
+      <div class="avator-icon">
+        <img src="../../assets/images/avatar.png" />
+      </div>
       <router-link to="/login" tag="div" class="nick-name">立即登录</router-link>
     </div>
 
@@ -34,12 +39,16 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "center",
 
   computed: {
     ...mapState("user", ["userInfo"])
+  },
+
+  methods: {
+    ...mapActions("user", ["handleUpdAvatar"])
   }
 };
 </script>
@@ -59,11 +68,28 @@ export default {
     color: #fff;
 
     .avator-icon {
+      position: relative;
       width: 63px;
       height: 63px;
       border-radius: 35px;
       margin-right: 20px;
       border: 2px solid #fff;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
     }
 
     .nick-name {

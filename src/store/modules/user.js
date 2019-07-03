@@ -13,6 +13,11 @@ const getters = {};
 const mutations = {
   setUserInfo(state, payload) {
     state.userInfo = payload.info;
+  },
+  setUserAvatar(state, payload) {
+    let newUserInfo = { ...state.userInfo, avatar: payload.avatar };
+    state.userInfo = newUserInfo;
+    window.localStorage.setItem("userInfo", JSON.stringify(newUserInfo));
   }
 };
 
@@ -45,6 +50,29 @@ const actions = {
         Toast(res.msg);
       }
     });
+  },
+
+  handleUpdAvatar({ commit, state }, event) {
+    Toast.loading({ duration: 0, message: "加载中..." });
+    let formData = new FormData();
+    formData.append("userId", state.userInfo.userId);
+    formData.append("avatar", event.target.files[0]);
+    axios
+      .post("http://localhost:9090/user/profile", formData, {
+        headers: {
+          "content-type": "multipart/form-data"
+        }
+      })
+      .then(response => {
+        Toast.clear();
+        let res = response.data;
+        if (res.code === 0) {
+          Toast("修改成功");
+          commit({ type: "setUserAvatar", avatar: res.data });
+        } else {
+          Toast(res.msg);
+        }
+      });
   }
 };
 
