@@ -1,5 +1,12 @@
 <template>
-  <van-list v-model="filmLoading" @load="getFilmList" :finished="isFinished" finished-text="别拉了">
+  <van-list
+    v-model="filmLoading"
+    :immediate-check="true"
+    @load="getFilmList"
+    :finished="isFinished"
+    finished-text="别拉了"
+    ref="myBox"
+  >
     <div class="page-home-films">
       <Banner class="banner" :list="bannerList" pagination loop />
 
@@ -70,6 +77,10 @@ export default {
   watch: {
     curFilmType(newVal, oldVal) {
       // 当 curFilmType 发生变化了，这是重新发送请求
+      // 0. 将滚动条滚动到顶部
+      // console.log(this.$refs.myBox.$el);
+      // scrollTop = 0;
+      this.$refs.myBox.$el.scrollTop = 0;
       // 1. 先将所有 filmList 数据清空，然后将 pageNum 设置 为 1
       this.getFilmList(true);
     }

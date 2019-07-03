@@ -78,8 +78,8 @@ const actions = {
   getFilmList({ commit, state, rootState }, isChangeFilmType) {
     // 判断 isChangeFilmType
     if (isChangeFilmType) {
-      // 1. 清空filmlist
-      commit({ type: "setFilmList", list: [], total: 1 });
+      // 1. 清空filmlist 这里会有个bug
+      // commit({ type: "setFilmList", list: [], total: 1 });
       // 2. 将 pageNum 设置为 1
       commit({ type: "setPageNum", num: 1 });
     }
@@ -115,7 +115,9 @@ const actions = {
             // list: state.filmList.concat(res.data.films), ✅
             // list: state.filmList.push(res.data.films),   ❎
             // list: state.filmList.push(...res.data.films), ✅
-            list: [...state.filmList, ...res.data.films],
+            list: isChangeFilmType
+              ? res.data.films
+              : [...state.filmList, ...res.data.films],
             total: res.data.total
           });
         } else {
