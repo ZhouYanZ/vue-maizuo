@@ -28,6 +28,10 @@ export default new VueRouter({
       component: () => import("./views/city/index.vue")
     },
     {
+      path: "/login",
+      component: () => import("./views/login/index.vue")
+    },
+    {
       path: "*",
       redirect: "/films"
     }
