@@ -1,6 +1,7 @@
 /* eslint-disable */
 const express = require("express");
 const mongoose = require("mongoose");
+const proxy = require("http-proxy-middleware");
 const multer = require("multer");
 const update = multer({
   dest: "./tmp"
@@ -29,9 +30,14 @@ mongoose
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(express.static("public"));
+// server.use((req, res, next) => {
+//   res.set("Access-Control-Allow-Origin", "*");
+//   res.set("Access-Control-Allow-Headers", "content-type");
+//   next();
+// });
+
 server.use((req, res, next) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  res.set("Access-Control-Allow-Headers", "content-type");
+  console.log(req.url);
   next();
 });
 
@@ -43,6 +49,14 @@ server.post(
   update.single("avatar"),
   userController.postUpdAvatar
 ); // 修改头像 multer
+
+// 正向代理的配置
+server.use(
+  proxy({
+    target: "http://m.maoyan.com",
+    changeOrigin: true
+  })
+);
 
 // 监听端口
 server.listen(9090);

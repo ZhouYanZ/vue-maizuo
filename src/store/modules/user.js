@@ -27,7 +27,7 @@ const actions = {
    */
   handleLogin(context, payload) {
     Toast.loading({ duration: 0, message: "加载中..." });
-    axios.post("http://localhost:9090/sign-in", payload).then(response => {
+    axios.post("/api/sign-in", payload).then(response => {
       Toast.clear();
       let res = response.data;
 
@@ -67,7 +67,7 @@ const actions = {
     formData.append("userId", state.userInfo.userId);
     formData.append("avatar", event.target.files[0]);
     axios
-      .post("http://localhost:9090/user/profile", formData, {
+      .post("/api/user/profile", formData, {
         headers: {
           "content-type": "multipart/form-data"
         }
